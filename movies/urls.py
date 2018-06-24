@@ -15,9 +15,11 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from django.conf import settings
+from django.conf.urls.static import static
 from apiv1 import urls as apiv1_urls
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include(apiv1_urls, namespace='apiv1')),
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
