@@ -17,9 +17,24 @@ class MovieAPIView(APIView):
     pagination_class = api_settings.DEFAULT_PAGINATION_CLASS
 
     def get(self, request):
-        movies = Movie.objects.all()
+        queryset = Movie.objects.all()
+
+        name = request.query_params.get('name', None)
+        if name is not None:
+            queryset = queryset.filter(name__icontains=name)
+
+        director = request.query_params.get('director', None)
+        if director is not None:
+            queryset = queryset.filter(director__icontains=director)
+
+        # filter if movie has genre with queried genre name
+        genre = request.query_params.get('genre', None)
+        if genre is not None:
+            queryset = queryset.filter(genre__name__icontains=genre)
+
         paginator = self.pagination_class()
-        result_page = paginator.paginate_queryset(movies, request)
+        result_page = paginator.paginate_queryset(queryset, request)
+
         serializer = MovieSerializer(result_page, many=True, context={
             'request': request
         })
