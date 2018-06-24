@@ -34,6 +34,7 @@ https://rocky-ravine-28021.herokuapp.com/movies/?genre=family
 
 POST a movie
 /movies/
+```
   {
     "popularity": 83.0,
     "director": "richa rupela",
@@ -41,12 +42,14 @@ POST a movie
     "name": "test",
     "genres": ["Comedy"]
   }
+```
 
 PUT a movie
 
 /movies/
 
-  {
+```
+{
     "popularity": 83.0,
     "director": "richa rupela",
     "score": 8.3,
@@ -54,4 +57,4 @@ PUT a movie
     "genres": ["Comedy"],
     "id": "255"
   }
-
+```
