@@ -22,6 +22,7 @@ class Command(BaseCommand):
             obj['name'] = movie_data.get('name')
             new_movie, created = Movie.objects.get_or_create(**obj)
             for genre in movie_data.get('genre'):
+                genre = genre.strip()
                 new_genre, created = Genre.objects.get_or_create(name=genre)
                 new_movie.genre.add(new_genre)
                 new_movie.save()

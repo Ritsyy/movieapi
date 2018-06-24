@@ -8,7 +8,7 @@ from rest_framework.settings import api_settings
 import json
 
 from .models import *
-from .serializers import MovieSerializer, GenreSerializer
+from .serializers import MovieSerializer
 
 
 class MovieAPIView(APIView):

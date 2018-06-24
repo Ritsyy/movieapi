@@ -3,14 +3,12 @@ from .models import Movie, Genre
 
 
 class MovieSerializer(serializers.ModelSerializer):
+    genres = serializers.SerializerMethodField()
+
+    def get_genres(self, instance):
+        genre_list = instance.genre.all().values_list('name', flat=True)
+        return genre_list
 
     class Meta:
         model = Movie
-        fields = '__all__'
-
-
-class GenreSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Genre
-        fields = '__all__'
+        fields = ('name', 'popularity', 'director', 'score', 'genres')
